@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<!-- using full width scalable background -->
+<html class="full" lang="ru">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!-- Заголовок стртаницы -->
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!--Style sheet for our game -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/game.css') }}">
+    <!-- JQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- Bootstrap JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% block extend_js %} {% endblock extend_js %}
+</head>
+<body>
+    <!-- page_start-->
+    <div id="page">
+        {% block content %} {% endblock content%}
+    </div>
+    <!-- page_end -->
+    <!-- footer_start-->
+    <footer class="container">
+        <hr />
+        <p align='center'>&copy; Andrew&and;Antony&and;Nick Card Game Example</p>>
+    </footer>
+    <!-- footer_end-->
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿{% extends "BaseMarkup.html" %}
+
+{% import "GameUI.html" as GameUI %}
+
+{% block extend_js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock extend_js %}
+
+{% block content %}
+<header class="container">
+    <h4 align="center">Card Game Protoype</h4>
+</header>
+<div id="body" class="container">
+    <!-- Opponent Area start-->
+    <div id="opponnent_area">
+        {{ GameUI.PlayerUI(opponent) }}
+        {{ GameUI.PlayerTable(opponent, True) }}
+    </div>
+    <!-- Opponent Area end -->
+    <div style="width: 100%; height: 10px"></div>
+    <!-- Player Area start -->
+    <div id="player_area">
+        {{ GameUI.PlayerTable(player) }}
+        {{ GameUI.PlayerUI(player, True) }}
+    </div>
+    <div id="messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="bg-danger" style="color: #000000; text-align:center">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <!-- Player Area end -->
+    <!-- GameData-->
+    {{ GameUI.GameData(opponent, player)}}
+</div>
+{% endblock %}
