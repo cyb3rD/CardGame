@@ -23,6 +23,16 @@ img {
 	height: 100px;
 }
 
+img.thumbnail:hover {
+  position: relative;
+  top: -250px;
+  left: -200px;
+  width: auto;
+  height: 350px;
+  display: block;
+  z-index: 3;
+}
+
 img.player-logo {
   min-height: 100px;
   /*min-width: 50px;*/

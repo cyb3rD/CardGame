@@ -1,0 +1,79 @@
+﻿{# Macro code for Player Main UI draw #}
+{% macro PlayerUI(Player, isPlayable = False) -%}
+<!-- Player Main Row start-->
+<div class="row">
+    <!-- Left Section-->
+    <div class="col-xs-3">
+        <!-- Player Image-->
+        <div class="col-xs-6">
+            <img class="player-logo" src="{{ url_for('static', filename='img/' + Player.avatar) }}">
+        </div>
+        <!-- Player Status-->
+        <div class="col-xs-6 text-center">
+            <p>{{ Player.name }}</p>
+            <p>Coins: {{ Player.GetStats().coins }}</p>
+            <p>Health: {{ Player.GetStats().health }}</p>
+            <p>Damage: {{ Player.GetStats().damage }}</p>
+            <p>Defense: {{ Player.GetStats().defense }}</p>
+        </div>
+    </div>
+    <!-- Middle Section-->
+    <div class="col-xs-6">
+        <!-- Player Hand-->
+        {% for card in Player.GetCardHolder("InHand").GetCardsIterable() -%}
+        <div class="col-xs-2">
+            {% if isPlayable == True %}
+                <img class = "thumbnail" src="{{ url_for('static', filename='img/work/'+card.GetCardData()['name']+'.jpg') }}">
+                <button type="button" class="btn btn-success btn-sm btn_action" name="MoveCard" value="{{loop.index}}">Разыграть</button>
+            {% else %}
+                <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
+            {% endif %}
+        </div>
+        {%- endfor %}
+    </div>
+    <!-- Right Section-->
+    <div class="col-xs-3">
+        <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
+        <p>Колода(AI)</p>
+        {% if isPlayable == True %}
+        <button type="button" class="btn btn-info btn-default btn_action" name="EndTurn" value="">Конец хода!</button>
+        {% endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{# Macro code for Player Table draw #}
+{% macro PlayerTable(Player, isEditable = False) -%}
+<!-- Player Table Row start-->
+<div class="row">
+    <div class="col-xs-2 col-xs-offset-1">
+        <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
+        <p align="left">Сброс(AI)</p>
+    </div>
+    <!-- Player Table-->
+    <div class="col-xs-6">
+        {% for card in Player.GetCardHolder("InPlay").GetCardsIterable() -%}
+        <div class="col-xs-2">
+            <img src="{{ url_for('static', filename='img/work/'+card.GetCardData()['name']+'.jpg') }}" class="center-block">        
+            {% if isEditable == True %}
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Health">
+                </div>
+            {% endif %}
+        </div>
+        {%- endfor %}
+    </div>
+</div>
+{%- endmacro %}
+
+{# Macro code for Saving Data between request#}
+{% macro GameData(Player1, Player2) -%}
+<form method="post" id="GameData" hidden="hidden" enctype="application/x-www-form-urlencoded">
+    <input type="text" name="command_event" value="" />
+    <input type="text" name="command_param" value="" />
+
+    <textarea name="Player1">{{ Player1.Save() }}</textarea>
+    <textarea name="Player2">{{ Player2.Save() }}</textarea>
+
+</form>
+{%- endmacro %}
