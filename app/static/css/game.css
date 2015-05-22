@@ -23,14 +23,21 @@ img {
 	height: 100px;
 }
 
-img.thumbnail:hover {
+img.thumbnail:hover, img.thumbnail:focus, img.thumbnail:active {
   position: relative;
-  top: -250px;
-  left: -200px;
+  top: -150px;
+  /*left: -200px;*/
   width: auto;
-  height: 350px;
-  display: block;
+  height: 300px;
+  display: inline-block;
   z-index: 3;
+}
+
+.char-info {
+  font-size: 12px;
+  padding: 6px 6px;
+}
+
 }
 
 img.player-logo {

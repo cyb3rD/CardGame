@@ -10,10 +10,12 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!--Style sheet for our game -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/game.css') }}">
+    
     <!-- JQuery -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <!-- Bootstrap JS-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- footer_end-->
     {% block extend_js %} {% endblock extend_js %}
 </head>
 <body>
@@ -22,11 +24,11 @@
         {% block content %} {% endblock content%}
     </div>
     <!-- page_end -->
-    <!-- footer_start-->
+    <!-- footer -->
     <footer class="container">
         <hr />
         <p align='center'>&copy; Andrew&and;Antony&and;Nick Card Game Example</p>>
     </footer>
-    <!-- footer_end-->
+
 </body>
 </html>

@@ -7,10 +7,20 @@
 {% endblock extend_js %}
 
 {% block content %}
-<header class="container">
-    <h4 align="center">Card Game Protoype</h4>
-</header>
+
 <div id="body" class="container">
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div id="messages" class="alert alert-warning alert-dismissible" role="alert">
+        {% for message in messages %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warning!</strong> {{ message }}
+
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
     <!-- Opponent Area start-->
     <div id="opponnent_area">
         {{ GameUI.PlayerUI(opponent) }}
@@ -23,15 +33,7 @@
         {{ GameUI.PlayerTable(player) }}
         {{ GameUI.PlayerUI(player, True) }}
     </div>
-    <div id="messages">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p class="bg-danger" style="color: #000000; text-align:center">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-    </div>
+    
     <!-- Player Area end -->
     <!-- GameData-->
     {{ GameUI.GameData(opponent, player)}}

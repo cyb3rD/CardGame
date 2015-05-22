@@ -68,7 +68,7 @@ def index():
             opstat.coins += 1
     else:
         # Create Opponent
-        opponent = Player("Computer AI")
+        opponent = Player("Opponent")
         o_deck = opponent.GetCardHolder("InDeck")
         o_hand = opponent.GetCardHolder("InHand")
         for index in range(5):

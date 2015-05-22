@@ -3,7 +3,7 @@ import jsonpickle
 from Cards import CardHolder, CardsDataBase
 ''' Модуль для описания игрока
 '''
-default_avatar = ["p1_avatar.png", "p2_avatar.png"]
+default_avatar = ["avatar1.png", "avatar2.png"]
 
 class PlayerStats():
     def __init__(self, coins = 1, health = 20, damage = 0, defense = 0):
