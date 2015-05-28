@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, flash
+from flask.ext.login import login_required
 from app import app
 
 from Game import Game, GameEvent
@@ -8,6 +9,8 @@ from Cards import Card, CardsDataBase, CardHolder
 from Forms import LoginForm
 
 @app.route('/', methods=['GET', 'POST'])
+#Authentication required
+@login_required
 def index():
     game = Game.GetInstance()
     # Если не Post
@@ -29,4 +32,4 @@ def login():
         flash('Login requested for user="%s", with password = "%s" and remember_me=%s' %
               (form.login.data, form.password.data, str(form.remember_me.data)))
         # return redirect('/index')
-    return render_template('Login.html', title='Вход', form=form)
+    return render_template('Login.html', title=u'Вход', form=form)
