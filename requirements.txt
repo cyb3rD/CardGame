@@ -1,2 +1,5 @@
 flask
+flask-wtf
 jsonpickle
+flask-sqlalchemy
+sqlalchemy-migrate
