@@ -12,8 +12,4 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = "login"
 
-@lm.user_loader
-def load_user(id):
-	return User.get(int(id))
-
 from app import views

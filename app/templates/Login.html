@@ -27,8 +27,8 @@
       <form class="form-signin" method="post" name="login" action="">
       {{ form.hidden_tag() }}
         <h2 class="form-signin-heading">Вход</h2>
-        <label for="login" class="sr-only">Имя пользователя</label>
-        {{ form.login(class_="form-control", placeholder="Имя пользователя...") }}
+        <label for="username" class="sr-only">Имя пользователя</label>
+        {{ form.username(class_="form-control", placeholder="Имя пользователя...") }}
         <label for="password" class="sr-only">Пароль</label>
         {{ form.password(class_="form-control", placeholder="Пароль") }}
         <div class="checkbox">
