@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, flash, redirect, session, url_for, g
-from flask.ext.login import login_required
+from flask.ext.login import login_required, login_user, logout_user, current_user
 from app import app, db, lm
 
 from Game import Game, GameEvent
 from Player import Player, default_avatar, PlayerStats
 from Cards import Card, CardsDataBase, CardHolder
-from Forms import LoginForm
+from Forms import LoginForm, RegisterForm
 from models import User
-
-@app.before_request
-def before_request():
-    #g.user = current_user
-    pass
 
 @app.route('/', methods=['GET', 'POST'])
 #Authentication required
@@ -33,8 +28,9 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    #if g.user is not None and g.user.is_authenticated():
-    #    return redirect(url_for('index'))
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('index'))
+    
     form = LoginForm()
     if request.method == 'GET':
         return render_template('Login.html', title=u'Вход', form=form)
@@ -44,12 +40,32 @@ def login():
         password = request.form['password']
         registered_user = User.query.filter_by(username=username,password=password).first()
         if registered_user is None:
-            flash('Username or Password is invalid' , 'error')
-            return redirect(url_for('login'))
+            flash('Username or Password is invalid')
+            return redirect(url_for('register'))
         login_user(registered_user)
         flash('Logged in successfully')
     return redirect(url_for('index'))
 
+@app.route('/register' , methods=['GET','POST'])
+def register():
+    form = RegisterForm()
+    if request.method == 'GET':
+        return render_template('Register.html', title=u'Регистрация', form=form)
+    
+    if form.validate_on_submit():
+        username = request.form['username']
+        password = request.form['password']
+        user = User(username, password)
+        db.session.add(user)
+        db.session.commit()
+        flash('User successfully registered! You can now Log In...')
+    return redirect(url_for('login'))
+
 @lm.user_loader
 def load_user(id):
-    return User.get(int(id))
+    return User.query.get(int(id))
+
+@app.before_request
+def before_request():
+    g.user = current_user
+    pass

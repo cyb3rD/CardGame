@@ -6,12 +6,12 @@ class User (db.Model):
 	username = db.Column('username',db.String(64), index = True, unique=True)
 	password = db.Column('password',db.String(64), index = True, unique=True)
 	#email = db.Column(db.String(120), index = True, unique=True)
-	registered_on = db.Column('registered_on', db.DateTime)
+	#registered_on = db.Column('registered_on', db.DateTime)
 
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
-		self.registered_on = datetime.utcnow()
+		#self.registered_on = datetime.utcnow()
 
 	def is_authenticated (self):
 		return True
