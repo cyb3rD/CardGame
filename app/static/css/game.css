@@ -7,12 +7,21 @@ p {
 	color: white;
 }
 
+p.login-form {
+  color: black;
+ }
+
+.form-signin-heading {
+  color: green;
+  text-align: center;
+}
+
 h4 {
 	color: white;
 }	
 
 .full {
-    background: url('../img/bg3.jpg') no-repeat center center fixed;
+    background: url('../img/pole.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -23,14 +32,21 @@ img {
 	height: 100px;
 }
 
-img.thumbnail:hover {
+img.thumbnail:hover, img.thumbnail:focus, img.thumbnail:active {
   position: relative;
-  top: -250px;
-  left: -200px;
+  top: -150px;
+  /*left: -200px;*/
   width: auto;
-  height: 350px;
-  display: block;
+  height: 300px;
+  display: inline-block;
   z-index: 3;
+}
+
+.char-info {
+  font-size: 12px;
+  padding: 6px 6px;
+}
+
 }
 
 img.player-logo {

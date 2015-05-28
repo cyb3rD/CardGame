@@ -4,17 +4,30 @@
 <div class="row">
     <!-- Left Section-->
     <div class="col-xs-3">
-        <!-- Player Image-->
-        <div class="col-xs-6">
+        <!-- Player Image and Name-->
+        <div class="col-xs-6" align="center">
             <img class="player-logo" src="{{ url_for('static', filename='img/' + Player.avatar) }}">
+            <button class="btn char-info" type="button"> <span class="glyphicon glyphicon-user" aria-hidden="true"> </span>{{ Player.name }}</button>
+            {% if isPlayable != True  %}
+                <input type="text" class="form-control" aria-label="Health" form="GameData" name="target[0]" value="0">
+            {% endif %}
         </div>
         <!-- Player Status-->
         <div class="col-xs-6 text-center">
-            <p>{{ Player.name }}</p>
-            <p>Coins: {{ Player.GetStats().coins }}</p>
-            <p>Health: {{ Player.GetStats().health }}</p>
-            <p>Damage: {{ Player.GetStats().damage }}</p>
-            <p>Defense: {{ Player.GetStats().defense }}</p>
+            <div class="btn-group-sm btn-group-vertical" role="group" aria-label="character-info">
+                <button class="btn btn-warning char-info" type="button">
+                  Coins: <span class="badge">{{ Player.Stats.coins }}</span><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-success char-info" type="button">
+                  Health: <span class="badge">{{ Player.Stats.health }}</span><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-danger char-info" type="button">
+                  Damage: <span class="badge">{{ Player.Stats.damage }}</span><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-info char-info" type="button">
+                  Defense: <span class="badge">{{ Player.Stats.defense }}</span>
+                </button>
+            </div>
         </div>
     </div>
     <!-- Middle Section-->
@@ -23,8 +36,8 @@
         {% for card in Player.GetCardHolder("InHand").GetCardsIterable() -%}
         <div class="col-xs-2">
             {% if isPlayable == True %}
-                <img class = "thumbnail" src="{{ url_for('static', filename='img/work/'+card.GetCardData()['name']+'.jpg') }}">
-                <button type="button" class="btn btn-success btn-sm btn_action" name="MoveCard" value="{{loop.index}}">Разыграть</button>
+                <img class = "thumbnail hvr-grow" src="{{ url_for('static', filename='img/work/'+card['name']+'.jpg') }}">
+                <button type="button" class="btn btn-success btn-sm btn_action" name="PlayCard" value="{{loop.index}}">Разыграть</button>
             {% else %}
                 <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
             {% endif %}
@@ -32,12 +45,13 @@
         {%- endfor %}
     </div>
     <!-- Right Section-->
-    <div class="col-xs-3">
+    <div class="col-xs-3" align="left">
+        <!-- Колода -->
         <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
-        <p>Колода(AI)</p>
         {% if isPlayable == True %}
-        <button type="button" class="btn btn-info btn-default btn_action" name="EndTurn" value="">Конец хода!</button>
+        <button type="button" class="btn btn-danger btn_action" name="EndTurn" value="">Конец хода!</button>
         {% endif %}
+        
     </div>
 </div>
 {%- endmacro %}
@@ -48,17 +62,15 @@
 <div class="row">
     <div class="col-xs-2 col-xs-offset-1">
         <img src="{{ url_for('static', filename='img/card_back.jpg') }}">
-        <p align="left">Сброс(AI)</p>
+        <p align="left"> </p>
     </div>
     <!-- Player Table-->
     <div class="col-xs-6">
         {% for card in Player.GetCardHolder("InPlay").GetCardsIterable() -%}
         <div class="col-xs-2">
-            <img src="{{ url_for('static', filename='img/work/'+card.GetCardData()['name']+'.jpg') }}" class="center-block">        
+            <img src="{{ url_for('static', filename='img/work/'+card['name']+'.jpg') }}" class="center-block">        
             {% if isEditable == True %}
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Health">
-                </div>
+                <input type="text" class="form-control" aria-label="Health" name="creature[]" value="">
             {% endif %}
         </div>
         {%- endfor %}
