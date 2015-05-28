@@ -7,6 +7,15 @@ p {
 	color: white;
 }
 
+p.login-form {
+  color: black;
+ }
+
+.form-signin-heading {
+  color: green;
+  text-align: center;
+}
+
 h4 {
 	color: white;
 }	

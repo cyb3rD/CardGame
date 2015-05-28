@@ -1,0 +1,33 @@
+<!-- extend from base layout -->
+{% extends "BaseMarkup.html" %}
+
+{% block extend_js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock extend_js %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-5"></div>
+    <div class="col-xs-3">
+      <form class="form-signin" method="post" name="login" action="">
+      {{ form.hidden_tag() }}
+        <h2 class="form-signin-heading">Вход</h2>
+        <label for="login" class="sr-only">Имя пользователя</label>
+        {{ form.login(class_="form-control", placeholder="Имя пользователя...") }}
+        <label for="password" class="sr-only">Пароль</label>
+        {{ form.password(class_="form-control", placeholder="Пароль") }}
+        <div class="checkbox">
+          <label>
+            {{ form.remember_me }} Запомнить меня
+          </label>
+
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+      </form>
+    </div>
+  </div>
+</div> <!-- /container -->
+
+{% endblock %}

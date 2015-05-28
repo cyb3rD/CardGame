@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import jsonpickle
 from Cards import CardHolder, CardsDataBase, Card
 ''' Модуль для описания игрока
@@ -34,6 +34,7 @@ class Player():
     def Stats(self):
         """ Получение характеристик игрока
         """
+        #check return self.__Stats
         tmp = self.__Stats
         return tmp
 

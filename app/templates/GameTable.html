@@ -14,7 +14,7 @@
     <div id="messages" class="alert alert-warning alert-dismissible" role="alert">
     {% for msg in game.EventsStatus -%}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Warning!</strong> {{ msg }}
+        <strong>Status:</strong> {{ msg }}
     {%- endfor %}
     </div>
     <!-- Opponent Area start-->

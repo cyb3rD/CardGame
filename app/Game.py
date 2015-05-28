@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from Player import Player, default_avatar
 from AI import SimpleAI
@@ -90,7 +90,6 @@ class Game(object):
             self.Opponent.MoveCard(card_index,"InDeck","InHand")
             self.Player.MoveCard(card_index,"InDeck","InHand")
         self.Player.StartTurn()
-        self.Opponent.StartTurn()
 
     def Restore(self, opponent_save_json, player_save_json):
         """ Востановление игры
