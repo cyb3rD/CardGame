@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, request
+from flask import render_template, request, flash
 from app import app
 
 from Game import Game, GameEvent
@@ -21,7 +21,12 @@ def index():
     # рендринг страницы
     return render_template("GameTable.html", opponent = game.Opponent, player = game.Player, game = game)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    return render_template('Login.html', title='Sign In', form=form)
+    if form.validate_on_submit():
+        flash('Login requested for user="%s", with password = "%s" and remember_me=%s' %
+              (form.login.data, form.password.data, str(form.remember_me.data)))
+        # return redirect('/index')
+    return render_template('Login.html', title='Вход', form=form)
